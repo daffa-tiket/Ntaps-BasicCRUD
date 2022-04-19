@@ -1,0 +1,707 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "contact": {},
+    "license": {}
+  },
+  "paths": {
+    "/pegawai": {
+      "get": {
+        "description": "Put all mandatory parameter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "pegawai-controller"
+        ],
+        "summary": "Pegawai",
+        "parameters": [
+          {
+            "type": "string",
+            "default": "TIKETCOM",
+            "description": "TIKETCOM",
+            "name": "X-Store-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "DESKTOP",
+            "description": "DESKTOP",
+            "name": "X-Channel-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "IDR",
+            "description": "IDR",
+            "name": "X-Currency",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "ee35b46d",
+            "description": "ee35b46d",
+            "name": "X-Request-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "gateway",
+            "description": "gateway",
+            "name": "X-Service-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "guest",
+            "description": "guest",
+            "name": "X-Username",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Account-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Reseller-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "02f0e6bf",
+            "description": "02f0e6bf",
+            "name": "X-Identity",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Business-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "GOOGLE",
+            "description": "GOOGLE",
+            "name": "X-Login-Media",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "EN",
+            "description": "EN",
+            "name": "Accept-Language",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "192.168.1.1",
+            "description": "192.168.1.1",
+            "name": "X-Forwarded-Host",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "192.168.1.1",
+            "description": "192.168.1.1",
+            "name": "True-Client-Ip",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/pegawai.GetAllPegawaiResponseDto"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Put all mandatory parameter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "pegawai-controller"
+        ],
+        "summary": "Pegawai",
+        "parameters": [
+          {
+            "type": "string",
+            "default": "TIKETCOM",
+            "description": "TIKETCOM",
+            "name": "X-Store-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "DESKTOP",
+            "description": "DESKTOP",
+            "name": "X-Channel-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "IDR",
+            "description": "IDR",
+            "name": "X-Currency",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "ee35b46d",
+            "description": "ee35b46d",
+            "name": "X-Request-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "gateway",
+            "description": "gateway",
+            "name": "X-Service-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "guest",
+            "description": "guest",
+            "name": "X-Username",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Account-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Reseller-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "02f0e6bf",
+            "description": "02f0e6bf",
+            "name": "X-Identity",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Business-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "GOOGLE",
+            "description": "GOOGLE",
+            "name": "X-Login-Media",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "EN",
+            "description": "EN",
+            "name": "Accept-Language",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "192.168.1.1",
+            "description": "192.168.1.1",
+            "name": "X-Forwarded-Host",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "192.168.1.1",
+            "description": "192.168.1.1",
+            "name": "True-Client-Ip",
+            "in": "header",
+            "required": true
+          },
+          {
+            "description": "CreatePegawaiRequestDto",
+            "name": "CreatePegawaiRequestDto",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pegawai.CreatePegawaiRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/pegawai.CreatePegawaiResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/pegawai/{id}": {
+      "put": {
+        "description": "Put all mandatory parameter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "pegawai-controller"
+        ],
+        "summary": "Pegawai",
+        "parameters": [
+          {
+            "type": "string",
+            "default": "TIKETCOM",
+            "description": "TIKETCOM",
+            "name": "X-Store-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "DESKTOP",
+            "description": "DESKTOP",
+            "name": "X-Channel-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "IDR",
+            "description": "IDR",
+            "name": "X-Currency",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "ee35b46d",
+            "description": "ee35b46d",
+            "name": "X-Request-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "gateway",
+            "description": "gateway",
+            "name": "X-Service-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "guest",
+            "description": "guest",
+            "name": "X-Username",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Account-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Reseller-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "02f0e6bf",
+            "description": "02f0e6bf",
+            "name": "X-Identity",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Business-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "GOOGLE",
+            "description": "GOOGLE",
+            "name": "X-Login-Media",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "EN",
+            "description": "EN",
+            "name": "Accept-Language",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "192.168.1.1",
+            "description": "192.168.1.1",
+            "name": "X-Forwarded-Host",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "192.168.1.1",
+            "description": "192.168.1.1",
+            "name": "True-Client-Ip",
+            "in": "header",
+            "required": true
+          },
+          {
+            "description": "UpdatePegawaiRequestDto",
+            "name": "UpdatePegawaiRequestDto",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pegawai.UpdatePegawaiRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/pegawai.UpdatePegawaiResponseDto"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Put all mandatory parameter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "pegawai-controller"
+        ],
+        "summary": "Pegawai",
+        "parameters": [
+          {
+            "type": "string",
+            "default": "TIKETCOM",
+            "description": "TIKETCOM",
+            "name": "X-Store-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "DESKTOP",
+            "description": "DESKTOP",
+            "name": "X-Channel-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "IDR",
+            "description": "IDR",
+            "name": "X-Currency",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "ee35b46d",
+            "description": "ee35b46d",
+            "name": "X-Request-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "gateway",
+            "description": "gateway",
+            "name": "X-Service-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "guest",
+            "description": "guest",
+            "name": "X-Username",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Account-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Reseller-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "02f0e6bf",
+            "description": "02f0e6bf",
+            "name": "X-Identity",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "1",
+            "description": "1",
+            "name": "X-Business-Id",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "GOOGLE",
+            "description": "GOOGLE",
+            "name": "X-Login-Media",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "EN",
+            "description": "EN",
+            "name": "Accept-Language",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "192.168.1.1",
+            "description": "192.168.1.1",
+            "name": "X-Forwarded-Host",
+            "in": "header",
+            "required": true
+          },
+          {
+            "type": "string",
+            "default": "192.168.1.1",
+            "description": "192.168.1.1",
+            "name": "True-Client-Ip",
+            "in": "header",
+            "required": true
+          },
+          {
+            "description": "DeletePegawaiRequestDto",
+            "name": "DeletePegawaiRequestDto",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pegawai.DeletePegawaiRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/pegawai.DeletePegawaiResponseDto"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "dto.MandatoryRequestV2Dto": {
+      "type": "object",
+      "required": [
+        "Accept-Language",
+        "X-Account-Id",
+        "X-Channel-Id",
+        "X-Currency",
+        "X-Request-Id",
+        "X-Service-Id",
+        "X-Store-Id",
+        "X-Username"
+      ],
+      "properties": {
+        "Accept-Language": {
+          "type": "string"
+        },
+        "True-Client-Ip": {
+          "type": "string"
+        },
+        "X-Account-Id": {
+          "type": "string"
+        },
+        "X-Business-Id": {
+          "type": "string"
+        },
+        "X-Channel-Id": {
+          "type": "string"
+        },
+        "X-Currency": {
+          "type": "string"
+        },
+        "X-Forwarded-For": {
+          "type": "string"
+        },
+        "X-Identity": {
+          "type": "string"
+        },
+        "X-Login-Media": {
+          "type": "string"
+        },
+        "X-Request-Id": {
+          "type": "string"
+        },
+        "X-Reseller-Id": {
+          "type": "string"
+        },
+        "X-Service-Id": {
+          "type": "string"
+        },
+        "X-Store-Id": {
+          "type": "string"
+        },
+        "X-Username": {
+          "type": "string"
+        }
+      }
+    },
+    "pegawai.CreatePegawaiRequestDto": {
+      "type": "object",
+      "properties": {
+        "pegawai": {
+          "type": "object",
+          "$ref": "#/definitions/pegawai.Pegawai"
+        }
+      }
+    },
+    "pegawai.CreatePegawaiResponseDto": {
+      "type": "object"
+    },
+    "pegawai.DeletePegawaiRequestDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        }
+      }
+    },
+    "pegawai.DeletePegawaiResponseDto": {
+      "type": "object"
+    },
+    "pegawai.GetAllPegawaiResponseDto": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object"
+        }
+      }
+    },
+    "pegawai.Pegawai": {
+      "type": "object",
+      "properties": {
+        "alamat": {
+          "type": "string"
+        },
+        "nama": {
+          "type": "string"
+        },
+        "telepon": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "pegawai.UpdatePegawaiRequestDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "pegawai": {
+          "type": "object",
+          "$ref": "#/definitions/pegawai.Pegawai"
+        }
+      }
+    },
+    "pegawai.UpdatePegawaiResponseDto": {
+      "type": "object",
+      "properties": {
+        "pegawai": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

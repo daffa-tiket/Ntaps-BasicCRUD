@@ -1,0 +1,506 @@
+definitions:
+  dto.MandatoryRequestV2Dto:
+    properties:
+      Accept-Language:
+        type: string
+      True-Client-Ip:
+        type: string
+      X-Account-Id:
+        type: string
+      X-Business-Id:
+        type: string
+      X-Channel-Id:
+        type: string
+      X-Currency:
+        type: string
+      X-Forwarded-For:
+        type: string
+      X-Identity:
+        type: string
+      X-Login-Media:
+        type: string
+      X-Request-Id:
+        type: string
+      X-Reseller-Id:
+        type: string
+      X-Service-Id:
+        type: string
+      X-Store-Id:
+        type: string
+      X-Username:
+        type: string
+    required:
+      - Accept-Language
+      - X-Account-Id
+      - X-Channel-Id
+      - X-Currency
+      - X-Request-Id
+      - X-Service-Id
+      - X-Store-Id
+      - X-Username
+    type: object
+  pegawai.CreatePegawaiRequestDto:
+    properties:
+      pegawai:
+        $ref: '#/definitions/pegawai.Pegawai'
+        type: object
+    type: object
+  pegawai.CreatePegawaiResponseDto:
+    type: object
+  pegawai.DeletePegawaiRequestDto:
+    properties:
+      id:
+        type: integer
+    type: object
+  pegawai.DeletePegawaiResponseDto:
+    type: object
+  pegawai.GetAllPegawaiResponseDto:
+    properties:
+      data:
+        type: object
+    type: object
+  pegawai.Pegawai:
+    properties:
+      alamat:
+        type: string
+      nama:
+        type: string
+      telepon:
+        type: string
+      version:
+        type: integer
+    type: object
+  pegawai.UpdatePegawaiRequestDto:
+    properties:
+      id:
+        type: integer
+      pegawai:
+        $ref: '#/definitions/pegawai.Pegawai'
+        type: object
+    type: object
+  pegawai.UpdatePegawaiResponseDto:
+    properties:
+      pegawai:
+        type: object
+    type: object
+info:
+  contact: { }
+  license: { }
+paths:
+  /pegawai:
+    get:
+      consumes:
+        - application/json
+      description: Put all mandatory parameter
+      parameters:
+        - default: TIKETCOM
+          description: TIKETCOM
+          in: header
+          name: X-Store-Id
+          required: true
+          type: string
+        - default: DESKTOP
+          description: DESKTOP
+          in: header
+          name: X-Channel-Id
+          required: true
+          type: string
+        - default: IDR
+          description: IDR
+          in: header
+          name: X-Currency
+          required: true
+          type: string
+        - default: ee35b46d
+          description: ee35b46d
+          in: header
+          name: X-Request-Id
+          required: true
+          type: string
+        - default: gateway
+          description: gateway
+          in: header
+          name: X-Service-Id
+          required: true
+          type: string
+        - default: guest
+          description: guest
+          in: header
+          name: X-Username
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Account-Id
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Reseller-Id
+          required: true
+          type: string
+        - default: 02f0e6bf
+          description: 02f0e6bf
+          in: header
+          name: X-Identity
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Business-Id
+          required: true
+          type: string
+        - default: GOOGLE
+          description: GOOGLE
+          in: header
+          name: X-Login-Media
+          required: true
+          type: string
+        - default: EN
+          description: EN
+          in: header
+          name: Accept-Language
+          required: true
+          type: string
+        - default: 192.168.1.1
+          description: 192.168.1.1
+          in: header
+          name: X-Forwarded-Host
+          required: true
+          type: string
+        - default: 192.168.1.1
+          description: 192.168.1.1
+          in: header
+          name: True-Client-Ip
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pegawai.GetAllPegawaiResponseDto'
+      summary: Pegawai
+      tags:
+        - pegawai-controller
+    post:
+      consumes:
+        - application/json
+      description: Put all mandatory parameter
+      parameters:
+        - default: TIKETCOM
+          description: TIKETCOM
+          in: header
+          name: X-Store-Id
+          required: true
+          type: string
+        - default: DESKTOP
+          description: DESKTOP
+          in: header
+          name: X-Channel-Id
+          required: true
+          type: string
+        - default: IDR
+          description: IDR
+          in: header
+          name: X-Currency
+          required: true
+          type: string
+        - default: ee35b46d
+          description: ee35b46d
+          in: header
+          name: X-Request-Id
+          required: true
+          type: string
+        - default: gateway
+          description: gateway
+          in: header
+          name: X-Service-Id
+          required: true
+          type: string
+        - default: guest
+          description: guest
+          in: header
+          name: X-Username
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Account-Id
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Reseller-Id
+          required: true
+          type: string
+        - default: 02f0e6bf
+          description: 02f0e6bf
+          in: header
+          name: X-Identity
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Business-Id
+          required: true
+          type: string
+        - default: GOOGLE
+          description: GOOGLE
+          in: header
+          name: X-Login-Media
+          required: true
+          type: string
+        - default: EN
+          description: EN
+          in: header
+          name: Accept-Language
+          required: true
+          type: string
+        - default: 192.168.1.1
+          description: 192.168.1.1
+          in: header
+          name: X-Forwarded-Host
+          required: true
+          type: string
+        - default: 192.168.1.1
+          description: 192.168.1.1
+          in: header
+          name: True-Client-Ip
+          required: true
+          type: string
+        - description: CreatePegawaiRequestDto
+          in: body
+          name: CreatePegawaiRequestDto
+          required: true
+          schema:
+            $ref: '#/definitions/pegawai.CreatePegawaiRequestDto'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pegawai.CreatePegawaiResponseDto'
+      summary: Pegawai
+      tags:
+        - pegawai-controller
+  /pegawai/{id}:
+    delete:
+      consumes:
+        - application/json
+      description: Put all mandatory parameter
+      parameters:
+        - default: TIKETCOM
+          description: TIKETCOM
+          in: header
+          name: X-Store-Id
+          required: true
+          type: string
+        - default: DESKTOP
+          description: DESKTOP
+          in: header
+          name: X-Channel-Id
+          required: true
+          type: string
+        - default: IDR
+          description: IDR
+          in: header
+          name: X-Currency
+          required: true
+          type: string
+        - default: ee35b46d
+          description: ee35b46d
+          in: header
+          name: X-Request-Id
+          required: true
+          type: string
+        - default: gateway
+          description: gateway
+          in: header
+          name: X-Service-Id
+          required: true
+          type: string
+        - default: guest
+          description: guest
+          in: header
+          name: X-Username
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Account-Id
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Reseller-Id
+          required: true
+          type: string
+        - default: 02f0e6bf
+          description: 02f0e6bf
+          in: header
+          name: X-Identity
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Business-Id
+          required: true
+          type: string
+        - default: GOOGLE
+          description: GOOGLE
+          in: header
+          name: X-Login-Media
+          required: true
+          type: string
+        - default: EN
+          description: EN
+          in: header
+          name: Accept-Language
+          required: true
+          type: string
+        - default: 192.168.1.1
+          description: 192.168.1.1
+          in: header
+          name: X-Forwarded-Host
+          required: true
+          type: string
+        - default: 192.168.1.1
+          description: 192.168.1.1
+          in: header
+          name: True-Client-Ip
+          required: true
+          type: string
+        - description: DeletePegawaiRequestDto
+          in: body
+          name: DeletePegawaiRequestDto
+          required: true
+          schema:
+            $ref: '#/definitions/pegawai.DeletePegawaiRequestDto'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pegawai.DeletePegawaiResponseDto'
+      summary: Pegawai
+      tags:
+        - pegawai-controller
+    put:
+      consumes:
+        - application/json
+      description: Put all mandatory parameter
+      parameters:
+        - default: TIKETCOM
+          description: TIKETCOM
+          in: header
+          name: X-Store-Id
+          required: true
+          type: string
+        - default: DESKTOP
+          description: DESKTOP
+          in: header
+          name: X-Channel-Id
+          required: true
+          type: string
+        - default: IDR
+          description: IDR
+          in: header
+          name: X-Currency
+          required: true
+          type: string
+        - default: ee35b46d
+          description: ee35b46d
+          in: header
+          name: X-Request-Id
+          required: true
+          type: string
+        - default: gateway
+          description: gateway
+          in: header
+          name: X-Service-Id
+          required: true
+          type: string
+        - default: guest
+          description: guest
+          in: header
+          name: X-Username
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Account-Id
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Reseller-Id
+          required: true
+          type: string
+        - default: 02f0e6bf
+          description: 02f0e6bf
+          in: header
+          name: X-Identity
+          required: true
+          type: string
+        - default: "1"
+          description: "1"
+          in: header
+          name: X-Business-Id
+          required: true
+          type: string
+        - default: GOOGLE
+          description: GOOGLE
+          in: header
+          name: X-Login-Media
+          required: true
+          type: string
+        - default: EN
+          description: EN
+          in: header
+          name: Accept-Language
+          required: true
+          type: string
+        - default: 192.168.1.1
+          description: 192.168.1.1
+          in: header
+          name: X-Forwarded-Host
+          required: true
+          type: string
+        - default: 192.168.1.1
+          description: 192.168.1.1
+          in: header
+          name: True-Client-Ip
+          required: true
+          type: string
+        - description: UpdatePegawaiRequestDto
+          in: body
+          name: UpdatePegawaiRequestDto
+          required: true
+          schema:
+            $ref: '#/definitions/pegawai.UpdatePegawaiRequestDto'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pegawai.UpdatePegawaiResponseDto'
+      summary: Pegawai
+      tags:
+        - pegawai-controller
+swagger: "2.0"

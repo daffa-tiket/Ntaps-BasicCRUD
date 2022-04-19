@@ -1,0 +1,371 @@
+{
+  "namespace": "github.com/tiket",
+  "project": "learn-crud",
+  "version": "",
+  "domain": [
+    {
+      "name": "pegawai",
+      "funcs": [
+        {
+          "name": "get_all_pegawai",
+          "withMessaging": false,
+          "withWorker": false,
+          "withHttp": true,
+          "withHttpMethod": "GET",
+          "withHttpRoutes": "/pegawai",
+          "withoutInterfaces": false,
+          "withoutApplication": false,
+          "withPersistenceType": "",
+          "withPersistenceOperation": "",
+          "withModelName": "",
+          "isGeneratedFromResource": false
+        },
+        {
+          "name": "delete_pegawai",
+          "withMessaging": false,
+          "withWorker": false,
+          "withHttp": true,
+          "withHttpMethod": "DELETE",
+          "withHttpRoutes": "/pegawai/:id",
+          "withoutInterfaces": false,
+          "withoutApplication": false,
+          "withPersistenceType": "",
+          "withPersistenceOperation": "",
+          "withModelName": "",
+          "isGeneratedFromResource": false
+        },
+        {
+          "name": "create_pegawai",
+          "withMessaging": false,
+          "withWorker": false,
+          "withHttp": true,
+          "withHttpMethod": "POST",
+          "withHttpRoutes": "/pegawai",
+          "withoutInterfaces": false,
+          "withoutApplication": false,
+          "withPersistenceType": "",
+          "withPersistenceOperation": "",
+          "withModelName": "",
+          "isGeneratedFromResource": false
+        },
+        {
+          "name": "update_pegawai",
+          "withMessaging": false,
+          "withWorker": false,
+          "withHttp": true,
+          "withHttpMethod": "PUT",
+          "withHttpRoutes": "/pegawai/:id",
+          "withoutInterfaces": false,
+          "withoutApplication": false,
+          "withPersistenceType": "",
+          "withPersistenceOperation": "",
+          "withModelName": "",
+          "isGeneratedFromResource": false
+        }
+      ],
+      "models": [
+        {
+          "name": "pegawai",
+          "persistenceType": "postgres-migration-kit"
+        }
+      ]
+    }
+  ],
+  "utilities": [
+    {
+      "name": "postgres",
+      "exportAs": "Sql",
+      "exportInterface": "ORM",
+      "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/persistent",
+      "importAs": "persistent",
+      "constructor": "NewPostgres",
+      "providerFunc": "\n\t\tfunc NewPostgres(conf *config.EnvConfiguration, logger logs.Logger) (persistent.ORM, error) {\n\t\t\tlft, _ := time.ParseDuration(conf.SqlConnMaxLifetime)\n\n\t\t\topts := \u0026persistent.Option{\n\t\t\t\tMaxIdleConnection: conf.SqlMaxIdleConnection,\n\t\t\t\tMaxOpenConnection: conf.SqlMaxOpenConnection,\n\t\t\t\tLogMode: conf.SqlLogMode,\n\t\t\t\tConnMaxLifetime: lft,\n\t\t\t}\n\t\t\tinstance, err := postgres.New(conf.SqlConnectionUri, opts, logger)\n\n\t\t\tif err != nil {\n\t\t\t\treturn nil, errors.Wrap(err, \"failed to open connection to postgres\")\n\t\t\t}\n\n\t\t\treturn instance, nil\n\t\t}\t\n",
+      "externalDeps": [
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/persistent",
+          "importAs": "persistent"
+        },
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/logs",
+          "importAs": "logs"
+        },
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/persistent/postgres",
+          "importAs": ""
+        },
+        {
+          "import": "time",
+          "importAs": ""
+        }
+      ],
+      "internalDeps": [
+        {
+          "import": "shared/config",
+          "importAs": "config"
+        }
+      ],
+      "modDeps": [
+        "logger"
+      ],
+      "conflictWith": [
+        "mysql",
+        "mongo"
+      ],
+      "config": [
+        {
+          "key": "SqlConnectionUri",
+          "type": "string",
+          "value": "host=localhost port=5432 dbname=learn_crudsslmode=disable",
+          "structTag": "envconfig:\"SQL_CONNECTION_URI\" default:\"host=localhost port=5432 dbname=learn_crudsslmode=disable\"",
+          "envKey": "SQL_CONNECTION_URI"
+        },
+        {
+          "key": "SqlMaxIdleConnection",
+          "type": "int",
+          "value": "4",
+          "structTag": "envconfig:\"SQL_MAX_IDLE_CONNECTION\" default:\"4\"",
+          "envKey": "SQL_MAX_IDLE_CONNECTION"
+        },
+        {
+          "key": "SqlMaxOpenConnection",
+          "type": "int",
+          "value": "8",
+          "structTag": "envconfig:\"SQL_MAX_OPEN_CONNECTION\" default:\"8\"",
+          "envKey": "SQL_MAX_OPEN_CONNECTION"
+        },
+        {
+          "key": "SqlConnMaxLifetime",
+          "type": "string",
+          "value": "300s",
+          "structTag": "envconfig:\"SQL_CONN_MAX_LIFETIME\" default:\"300s\"",
+          "envKey": "SQL_CONN_MAX_LIFETIME"
+        },
+        {
+          "key": "SqlLogMode",
+          "type": "bool",
+          "value": "false",
+          "structTag": "envconfig:\"MYSQL_LOG_MODE\" default:\"false\"",
+          "envKey": "MYSQL_LOG_MODE"
+        }
+      ],
+      "pointer": "",
+      "noMock": false
+    },
+    {
+      "name": "logger",
+      "exportAs": "Logger",
+      "exportInterface": "Logger",
+      "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/logs",
+      "importAs": "logs",
+      "constructor": "NewLogger",
+      "providerFunc": "func NewLogger(conf *config.EnvConfiguration) (logs.Logger, error) {\n\t\t\treturn logs.New(\u0026logs.Option{\n\t\t\t\tLogFilePath: conf.LoggerFileName,\n\t\t\t\tFormatter:   logs.Formatter(conf.LoggerFormater),\n\t\t\t\tLevel:       logs.Level(conf.LoggerLevel),\n\t\t\t\tMaxSize:     conf.LoggerMaxSize,\n\t\t\t\tMaxBackups:  conf.LoggerMaxBackups,\n\t\t\t\tMaxAge:      conf.LoggerMaxAge,\n\t\t\t\tCompress:    conf.LoggerCompress,\n\t\t\t})\n    \t}",
+      "externalDeps": [
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/logs",
+          "importAs": "logs"
+        }
+      ],
+      "internalDeps": [
+        {
+          "import": "shared/config",
+          "importAs": "config"
+        }
+      ],
+      "modDeps": [],
+      "conflictWith": null,
+      "config": [
+        {
+          "key": "LoggerFileName",
+          "type": "string",
+          "value": "application.log",
+          "structTag": "envconfig:\"LOGGER_FILE_NAME\"",
+          "envKey": "LOGGER_FILE_NAME"
+        },
+        {
+          "key": "LoggerFormater",
+          "type": "string",
+          "value": "TEXT",
+          "structTag": "envconfig:\"LOGGER_FORMATTER\" default:\"TEXT\" required:\"true\"",
+          "envKey": "LOGGER_FORMATTER"
+        },
+        {
+          "key": "LoggerLevel",
+          "type": "string",
+          "value": "INFO",
+          "structTag": "envconfig:\"LOGGER_LEVEL\" default:\"INFO\" required:\"true\"",
+          "envKey": "LOGGER_LEVEL"
+        },
+        {
+          "key": "LoggerMaxSize",
+          "type": "int",
+          "value": "400",
+          "structTag": "envconfig:\"LOGGER_MAX_SIZE\" default:\"400\" required:\"true\"",
+          "envKey": "LOGGER_MAX_SIZE"
+        },
+        {
+          "key": "LoggerMaxBackups",
+          "type": "int",
+          "value": "0",
+          "structTag": "envconfig:\"LOGGER_MAX_BACKUPS\" default:\"0\" required:\"true\"",
+          "envKey": "LOGGER_MAX_BACKUPS"
+        },
+        {
+          "key": "LoggerMaxAge",
+          "type": "int",
+          "value": "7",
+          "structTag": "envconfig:\"LOGGER_MAX_AGE\" default:\"7\" required:\"true\"",
+          "envKey": "LOGGER_MAX_AGE"
+        },
+        {
+          "key": "LoggerCompress",
+          "type": "bool",
+          "value": "true",
+          "structTag": "envconfig:\"LOGGER_COMPRESS\" default:\"true\" required:\"true\"",
+          "envKey": "LOGGER_COMPRESS"
+        }
+      ],
+      "pointer": "",
+      "noMock": false
+    },
+    {
+      "name": "postgres-migration-kit",
+      "exportAs": "Migration",
+      "exportInterface": "Tool",
+      "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/util/migration",
+      "importAs": "migrator",
+      "constructor": "NewMigration",
+      "providerFunc": "\n\t\tfunc NewMigration(orm persistent.ORM, logger logs.Logger) (migrator.Tool, error) {\n\t\t\tscripts := migration.MigrationScript\n\t\t\treturn migrator.NewSqlMigration(orm, scripts, logger)\n\t\t}\n",
+      "externalDeps": [
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/logs",
+          "importAs": ""
+        },
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/util/migration",
+          "importAs": "migrator"
+        },
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/persistent",
+          "importAs": ""
+        }
+      ],
+      "internalDeps": [
+        {
+          "import": "migration",
+          "importAs": ""
+        }
+      ],
+      "modDeps": [
+        "postgres",
+        "logger"
+      ],
+      "conflictWith": [
+        "mysql-migration-kit",
+        "mongo-migration-kit"
+      ],
+      "config": null,
+      "pointer": "",
+      "noMock": true
+    },
+    {
+      "name": "echo",
+      "exportAs": "Echo",
+      "exportInterface": "Echo",
+      "import": "github.com/labstack/echo/v4",
+      "importAs": "echo",
+      "constructor": "NewEcho",
+      "providerFunc": "\n\t\t\tfunc NewEcho(logger *echokit.LoggerWrapper, validator validator.Validator) (*echo.Echo, error) {\n\t\t\t\te := echo.New()\n\t\t\t\te.Logger = logger\n\t\t\t\te.Validator = validator\n\t\t\t\treturn e, nil\n\t\t\t}\n\t\t",
+      "externalDeps": [
+        {
+          "import": "github.com/labstack/echo/v4",
+          "importAs": "echo"
+        },
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/util/echokit",
+          "importAs": "echokit"
+        },
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/util/validator",
+          "importAs": "validator"
+        }
+      ],
+      "internalDeps": null,
+      "modDeps": [
+        "echo-logger-wrapper",
+        "validator"
+      ],
+      "conflictWith": null,
+      "config": [
+        {
+          "key": "EchoServerPort",
+          "type": "int",
+          "value": "9000",
+          "structTag": "envconfig:\"ECHO_SERVER_PORT\" default:\"9000\"",
+          "envKey": "ECHO_SERVER_PORT"
+        }
+      ],
+      "pointer": "*",
+      "noMock": true
+    },
+    {
+      "name": "echo-logger-wrapper",
+      "exportAs": "EchoLoggerWrapper",
+      "exportInterface": "LoggerWrapper",
+      "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/util/echokit",
+      "importAs": "echokit",
+      "constructor": "NewEchoLoggerWrapper",
+      "providerFunc": "\n\t\t\tfunc NewEchoLoggerWrapper(logger logs.Logger) (*echokit.LoggerWrapper, error) {\n\t\t\t\treturn echokit.NewLoggerWrapper(logger)\n\t\t\t}\n\t\t",
+      "externalDeps": [
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/logs",
+          "importAs": ""
+        },
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/util/echokit",
+          "importAs": ""
+        }
+      ],
+      "internalDeps": null,
+      "modDeps": [
+        "logger"
+      ],
+      "conflictWith": null,
+      "config": null,
+      "pointer": "*",
+      "noMock": true
+    },
+    {
+      "name": "validator",
+      "exportAs": "Validator",
+      "exportInterface": "Validator",
+      "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/util/validator",
+      "importAs": "validator",
+      "constructor": "NewValidator",
+      "providerFunc": "\n\t\t\tfunc NewValidator() (validator.Validator, error) {\n\t\t\t\treturn validator.New(), nil\n\t\t\t}\n\t\t",
+      "externalDeps": [
+        {
+          "import": "github.com/tiket/TIX-HOTEL-UTILITIES-GO/util/validator",
+          "importAs": "validator"
+        }
+      ],
+      "internalDeps": null,
+      "modDeps": null,
+      "conflictWith": null,
+      "config": null,
+      "pointer": "",
+      "noMock": false
+    }
+  ],
+  "migrations": [
+    {
+      "name": "create_table_users",
+      "timestamp": 1650257702999912000,
+      "resource": ""
+    },
+    {
+      "name": "create_table_pegawai",
+      "timestamp": 1650257716879831000,
+      "resource": ""
+    }
+  ]
+}
