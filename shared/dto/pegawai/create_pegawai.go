@@ -12,5 +12,6 @@ type (
 
 	CreatePegawaiResponseDto struct {
 		MandatoryRequestV2Dto dto.MandatoryRequestV2Dto `json:"-"`
+		Pegawai               interface{}
 	}
 )
