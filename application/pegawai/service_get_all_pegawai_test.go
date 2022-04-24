@@ -19,17 +19,14 @@ func Test_Service_GetAllPegawai(t *testing.T) {
 		errMsg     = "Err"
 		sqlMock    = mock_persistent.NewMockORM(ctrl)
 		loggerMock = logger_mock.NewMockLogger(ctrl)
-
-		pegawai []Pegawai
+		pegawai    []Pegawai
 	)
 
 	defer ctrl.Finish()
 
 	t.Run("when GetAllPegawai failed", func(t *testing.T) {
-
-		//repo.EXPECT().Find(gomock.Any()).Return(nil, errors.New(errMsg))
 		repo.EXPECT().Find(sqlMock).Return(nil, errors.New(errMsg))
-		loggerMock.EXPECT().Error("Error repository")
+		loggerMock.EXPECT().Error("Error repository `Find`")
 
 		service, _ := NewService(shared.Holder{Sql: sqlMock, Logger: loggerMock}, RepositoryHolder{PegawaiRepository: repo})
 
@@ -40,7 +37,7 @@ func Test_Service_GetAllPegawai(t *testing.T) {
 	t.Run("when GetAllPegawai success", func(t *testing.T) {
 		repo.EXPECT().Find(sqlMock).Return(pegawai, nil)
 
-		service, _ := NewService(shared.Holder{Sql: sqlMock}, RepositoryHolder{PegawaiRepository: repo})
+		service, _ := NewService(shared.Holder{Sql: sqlMock, Logger: loggerMock}, RepositoryHolder{PegawaiRepository: repo})
 
 		res, err := service.GetAllPegawai(context.Background(), pegawai_dto.GetAllPegawaiRequestDto{})
 		assert.Equal(t, pegawai, res.Data)

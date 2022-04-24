@@ -8,7 +8,7 @@ import (
 func (s *service) GetAllPegawai(ctx context.Context, request pegawai_dto.GetAllPegawaiRequestDto) (*pegawai_dto.GetAllPegawaiResponseDto, error) {
 	value, err := s.RepositoryHolder.PegawaiRepository.Find(s.SharedHolder.Sql)
 	if err != nil {
-		s.SharedHolder.Logger.Error("Error repository")
+		s.SharedHolder.Logger.Error("Error repository `Find`")
 		return nil, err
 	}
 	return &pegawai_dto.GetAllPegawaiResponseDto{

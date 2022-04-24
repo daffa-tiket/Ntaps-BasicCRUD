@@ -6,6 +6,7 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 	mock_persistent "github.com/tiket/TIX-HOTEL-UTILITIES-GO/mocks/persistent"
+	logger_mock "github.com/tiket/learn-crud/mocks/logger"
 	"github.com/tiket/learn-crud/shared"
 	pegawai_dto "github.com/tiket/learn-crud/shared/dto/pegawai"
 	"testing"
@@ -13,39 +14,37 @@ import (
 
 func Test_Service_UpdatePegawai(t *testing.T) {
 	var (
-		ctrl    = gomock.NewController(t)
-		sqlMock = mock_persistent.NewMockORM(ctrl)
+		ctrl        = gomock.NewController(t)
+		repo        = NewMockPegawaiRepository(ctrl)
+		errMsg      = "Err"
+		sqlMock     = mock_persistent.NewMockORM(ctrl)
+		loggerMock  = logger_mock.NewMockLogger(ctrl)
+		pegawaiMock = Pegawai{}
 	)
 
 	defer ctrl.Finish()
 
-	t.Run("when FindOne UpdatePegawai failed", func(t *testing.T) {
+	t.Run("when FindOnePegawai failed", func(t *testing.T) {
+		repo.EXPECT().FindOne(sqlMock, "id = ?", 1).Return(nil, errors.New(errMsg))
+		loggerMock.EXPECT().Error("Error repository `FindOne`")
 
-		pegawaiRepo := NewMockPegawaiRepository(ctrl)
-		pegawaiRepo.EXPECT().FindOne(sqlMock, "id = ?", 1).Return(nil, errors.New("Error FindOne"))
-
-		service, _ := NewService(shared.Holder{Sql: sqlMock}, RepositoryHolder{
-			PegawaiRepository: pegawaiRepo,
+		service, _ := NewService(shared.Holder{Sql: sqlMock, Logger: loggerMock}, RepositoryHolder{
+			PegawaiRepository: repo,
 		})
 
 		_, err := service.UpdatePegawai(context.Background(), pegawai_dto.UpdatePegawaiRequestDto{
 			ID: 1,
 		})
-		assert.EqualError(t, err, "Error FindOne")
+		assert.EqualError(t, err, errMsg)
 	})
 
 	t.Run("when UpdatePegawai failed", func(t *testing.T) {
-		pegawaiMock := Pegawai{
-			Nama:    "Nando",
-			Alamat:  "Bandung",
-			Telepon: "0813",
-		}
-		pegawaiRepo := NewMockPegawaiRepository(ctrl)
-		pegawaiRepo.EXPECT().FindOne(sqlMock, "id = ?", 1).Return(&pegawaiMock, nil)
-		pegawaiRepo.EXPECT().Update(sqlMock, &pegawaiMock).Return(errors.New("Error Update"))
+		repo.EXPECT().FindOne(sqlMock, "id = ?", 1).Return(&pegawaiMock, nil)
+		repo.EXPECT().Update(sqlMock, &pegawaiMock).Return(errors.New(errMsg))
+		loggerMock.EXPECT().Error("Error repository `Update`")
 
-		service, _ := NewService(shared.Holder{Sql: sqlMock}, RepositoryHolder{
-			PegawaiRepository: pegawaiRepo,
+		service, _ := NewService(shared.Holder{Sql: sqlMock, Logger: loggerMock}, RepositoryHolder{
+			PegawaiRepository: repo,
 		})
 
 		res, err := service.UpdatePegawai(context.Background(), pegawai_dto.UpdatePegawaiRequestDto{ID: 1})
@@ -54,17 +53,11 @@ func Test_Service_UpdatePegawai(t *testing.T) {
 	})
 
 	t.Run("when UpdatePegawai success", func(t *testing.T) {
-		pegawaiMock := Pegawai{
-			Nama:    "Nando",
-			Alamat:  "Bandung",
-			Telepon: "0813",
-		}
-		pegawaiRepo := NewMockPegawaiRepository(ctrl)
-		pegawaiRepo.EXPECT().FindOne(sqlMock, "id = ?", 1).Return(&pegawaiMock, nil)
-		pegawaiRepo.EXPECT().Update(sqlMock, &pegawaiMock).Return(nil)
+		repo.EXPECT().FindOne(sqlMock, "id = ?", 1).Return(&pegawaiMock, nil)
+		repo.EXPECT().Update(sqlMock, &pegawaiMock).Return(nil)
 
-		service, _ := NewService(shared.Holder{Sql: sqlMock}, RepositoryHolder{
-			PegawaiRepository: pegawaiRepo,
+		service, _ := NewService(shared.Holder{Sql: sqlMock, Logger: loggerMock}, RepositoryHolder{
+			PegawaiRepository: repo,
 		})
 
 		res, err := service.UpdatePegawai(context.Background(), pegawai_dto.UpdatePegawaiRequestDto{ID: 1})
